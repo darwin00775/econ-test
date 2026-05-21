@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HeroEconomics｜DSE 經濟科系統課程</title>
+  <meta name="description" content="DSE Econ 系統化補習課程｜由 concept、graph、MC、LQ、DRQ 到 Past Paper 答題框架，一套完整教你經濟科點樣真正攞分。">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome CDN：不要加 integrity / crossorigin -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['system-ui', 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', 'sans-serif']
+          },
+          boxShadow: {
+            glow: '0 0 34px rgba(239, 68, 68, 0.55)',
+            redSoft: '0 24px 80px rgba(185, 28, 28, 0.32)',
+            card: '0 22px 70px rgba(0, 0, 0, 0.42)'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-14px)' }
+            },
+            pulseRing: {
+              '0%': { transform: 'scale(0.92)', opacity: '0.75' },
+              '70%': { transform: 'scale(1.25)', opacity: '0' },
+              '100%': { transform: 'scale(1.25)', opacity: '0' }
+            },
+            shine: {
+              '0%': { transform: 'translateX(-120%) skewX(-16deg)' },
+              '100%': { transform: 'translateX(220%) skewX(-16deg)' }
+            },
+            gradientMove: {
+              '0%,100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' }
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' }
+            },
+            spinSlow: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' }
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(18px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          },
+          animation: {
+            float: 'float 5s ease-in-out infinite',
+            pulseRing: 'pulseRing 2.4s ease-out infinite',
+            shine: 'shine 3.8s ease-in-out infinite',
+            gradientMove: 'gradientMove 9s ease infinite',
+            marquee: 'marquee 26s linear infinite',
+            spinSlow: 'spinSlow 18s linear infinite',
+            fadeUp: 'fadeUp .7s ease-out forwards'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-[#050505] text-white font-sans antialiased overflow-x-hidden selection:bg-red-600 selection:text-white">
+
+  <!-- Background -->
+  <div class="fixed inset-0 -z-10">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(239,68,68,.36),transparent_34%),radial-gradient(circle_at_82%_18%,rgba(127,29,29,.34),transparent_32%),radial-gradient(circle_at_50%_100%,rgba(239,68,68,.20),transparent_36%),linear-gradient(135deg,#020202,#070707_45%,#160202)]"></div>
+    <div class="absolute inset-0 opacity-[0.18] bg-[linear-gradient(120deg,transparent_0%,transparent_42%,rgba(248,113,113,.65)_43%,transparent_44%,transparent_100%)]"></div>
+    <div class="absolute inset-0 opacity-[0.08] bg-[radial-gradient(circle,#fff_1px,transparent_1px)] bg-[length:28px_28px]"></div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div class="fixed top-0 left-0 right-0 z-[70] h-1 bg-white/5">
+    <div id="scrollProgress" class="h-full w-0 bg-gradient-to-r from-red-700 via-red-500 to-white"></div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="fixed top-1 left-0 right-0 z-50 border-b border-white/10 bg-black/72 backdrop-blur-2xl">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-3 flex items-center justify-between">
+      <a href="#top" class="group flex items-center gap-3">
+        <div class="relative h-10 w-10 rounded-2xl bg-gradient-to-br from-red-500 to-red-900 shadow-glow flex items-center justify-center overflow-hidden">
+          <span class="absolute inset-0 bg-white/30 -translate-x-full group-hover:animate-shine"></span>
+          <i class="fa-solid fa-chart-line relative z-10"></i>
+        </div>
+        <div class="leading-tight">
+          <p class="font-black tracking-tight">HeroEconomics</p>
+          <p class="text-[11px] text-white/55">DSE Econ System Course</p>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7 text-sm text-white/68">
+        <a href="#pain" class="hover:text-red-300 transition">學生痛點</a>
+        <a href="#system" class="hover:text-red-300 transition">課程系統</a>
+        <a href="#forms" class="hover:text-red-300 transition">中四中五中六</a>
+        <a href="#outcome" class="hover:text-red-300 transition">完成後改變</a>
+        <a href="#faq" class="hover:text-red-300 transition">FAQ</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-3">
+        <a href="https://www.instagram.com/heroeconomics" target="_blank" class="h-10 w-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/10 transition">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="#apply" class="magnetic relative overflow-hidden inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-black shadow-glow hover:bg-red-500 transition">
+          立即查詢
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <button id="menuBtn" class="lg:hidden h-10 w-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-white/10 bg-black/95 px-4 py-4">
+      <div class="grid grid-cols-2 gap-2 text-sm">
+        <a href="#pain" class="rounded-xl bg-white/5 px-3 py-3">學生痛點</a>
+        <a href="#system" class="rounded-xl bg-white/5 px-3 py-3">課程系統</a>
+        <a href="#forms" class="rounded-xl bg-white/5 px-3 py-3">中四中五中六</a>
+        <a href="#outcome" class="rounded-xl bg-white/5 px-3 py-3">完成後改變</a>
+        <a href="#faq" class="rounded-xl bg-white/5 px-3 py-3">FAQ</a>
+        <a href="#apply" class="rounded-xl bg-red-600 px-3 py-3 font-black text-center">立即查詢</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="pt-20">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16 lg:py-24">
+        <div class="grid lg:grid-cols-[1.06fr_.94fr] gap-8 lg:gap-12 items-center">
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700">
+            <div class="inline-flex items-center gap-2 rounded-full border border-red-400/30 bg-red-500/10 px-3 py-1.5 text-xs sm:text-sm text-red-100 mb-5">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="absolute inline-flex h-full w-full rounded-full bg-red-400 animate-ping opacity-70"></span>
+                <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500"></span>
+              </span>
+              F4–F6｜Concept → Graph → Answer
+            </div>
+
+            <h1 class="text-[2.35rem] sm:text-6xl lg:text-7xl font-black leading-[1.02] tracking-tight">
+              經濟科唔係<br class="hidden sm:block">
+              背得多就高分，
+              <span class="block mt-2 text-transparent bg-clip-text bg-[linear-gradient(90deg,#fff,#f87171,#dc2626,#fff)] bg-[length:260%_260%] animate-gradientMove">
+                係識將 concept 變答案。
+              </span>
+            </h1>
+
+            <p class="mt-5 sm:mt-7 max-w-2xl text-sm sm:text-lg lg:text-xl leading-relaxed text-white/70">
+              一套專為 DSE Econ 設計嘅系統課程，由基礎概念、考試字眼、graph 分析、MC 伏位、LQ/DRQ 框架，到 Past Paper 操練，幫你由「見題驚」變成「知道第一步做咩」。
+            </p>
+
+            <div class="mt-7 flex flex-col sm:flex-row gap-3">
+              <a href="#apply" class="magnetic group relative overflow-hidden inline-flex items-center justify-center gap-3 rounded-2xl bg-red-600 px-6 py-3.5 sm:py-4 text-base sm:text-lg font-black shadow-glow hover:bg-red-500 transition">
+                <span class="absolute inset-0 bg-white/25 -translate-x-full group-hover:animate-shine"></span>
+                <span class="relative z-10">立即查詢報名</span>
+                <i class="fa-solid fa-arrow-right relative z-10"></i>
+              </a>
+              <a href="#forms" class="inline-flex items-center justify-center gap-3 rounded-2xl border border-white/12 bg-white/7 px-6 py-3.5 sm:py-4 text-base sm:text-lg font-bold hover:bg-white/12 transition">
+                睇課程點幫中四中五中六
+                <i class="fa-solid fa-layer-group text-red-300"></i>
+              </a>
+            </div>
+
+            <div class="mt-7 grid grid-cols-3 gap-2 sm:gap-3 max-w-xl">
+              <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-3 sm:p-4">
+                <p class="text-xl sm:text-3xl font-black text-red-300" data-count="90">0</p>
+                <p class="text-[10px] sm:text-xs text-white/55 mt-1">MC 目標命中率</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-3 sm:p-4">
+                <p class="text-xl sm:text-3xl font-black text-red-300" data-count="14">0</p>
+                <p class="text-[10px] sm:text-xs text-white/55 mt-1">DRQ 滿分框架</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-3 sm:p-4">
+                <p class="text-xl sm:text-3xl font-black text-red-300" data-count="1000">0</p>
+                <p class="text-[10px] sm:text-xs text-white/55 mt-1">門生累積</p>
+              </div>
+            </div>
+          </div>
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-150 relative">
+            <div class="absolute -inset-5 rounded-[2.5rem] bg-red-600/20 blur-3xl animate-pulse"></div>
+
+            <div class="relative rounded-[2rem] border border-white/12 bg-white/[0.07] p-3 sm:p-5 shadow-card backdrop-blur-xl">
+              <div class="rounded-[1.5rem] border border-white/10 bg-black/80 p-4 sm:p-6 overflow-hidden">
+                <div class="flex items-start justify-between gap-4 mb-5">
+                  <div>
+                    <p class="text-xs text-red-300 font-black uppercase tracking-[.28em]">System Map</p>
+                    <h2 class="mt-2 text-2xl sm:text-3xl font-black">DSE Econ 攞分路線</h2>
+                  </div>
+                  <div class="relative h-14 w-14 rounded-2xl bg-red-600 flex items-center justify-center shadow-glow">
+                    <span class="absolute inset-0 rounded-2xl border border-red-300 animate-pulseRing"></span>
+                    <i class="fa-solid fa-brain text-2xl"></i>
+                  </div>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="group rounded-2xl bg-white text-black p-4 sm:p-5 flex gap-3 items-start hover:-translate-y-1 transition">
+                    <div class="h-9 w-9 shrink-0 rounded-xl bg-green-500 text-white flex items-center justify-center">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-black text-lg sm:text-xl text-red-700">一套完整 Econ 思維框架</h3>
+                      <p class="mt-1 text-sm sm:text-base text-zinc-700">每個 topic 點樣互相連接，唔再一課還一課咁散。</p>
+                    </div>
+                  </div>
+
+                  <div class="group rounded-2xl bg-white text-black p-4 sm:p-5 flex gap-3 items-start hover:-translate-y-1 transition">
+                    <div class="h-9 w-9 shrink-0 rounded-xl bg-green-500 text-white flex items-center justify-center">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-black text-lg sm:text-xl text-red-700">做題唔再靠估</h3>
+                      <p class="mt-1 text-sm sm:text-base text-zinc-700">題目點拆、graph 點分析、答案點鋪排，全部有方法。</p>
+                    </div>
+                  </div>
+
+                  <div class="group rounded-2xl bg-white text-black p-4 sm:p-5 flex gap-3 items-start hover:-translate-y-1 transition">
+                    <div class="h-9 w-9 shrink-0 rounded-xl bg-green-500 text-white flex items-center justify-center">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-black text-lg sm:text-xl text-red-700">分數有根據提升</h3>
+                      <p class="mt-1 text-sm sm:text-base text-zinc-700">唔係靠好彩，而係知道自己點解會啱、點樣攞分。</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-5 rounded-2xl border border-red-500/25 bg-red-950/45 p-4">
+                  <p class="text-sm sm:text-base font-bold text-white/90">
+                    <i class="fa-solid fa-quote-left text-red-400 mr-2"></i>
+                    一個課程之後，你會真正明白自己喺講咩。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden lg:block absolute -right-6 -top-7 text-red-500/70 text-8xl animate-float">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-y border-white/10 bg-white/[0.04] overflow-hidden">
+        <div class="flex w-[200%] animate-marquee py-3 text-xs sm:text-sm font-black text-white/65 whitespace-nowrap">
+          <span class="mx-6">Concept 系統化</span>
+          <span class="mx-6 text-red-300">Graph 拆解</span>
+          <span class="mx-6">MC 伏位</span>
+          <span class="mx-6 text-red-300">LQ 框架</span>
+          <span class="mx-6">DRQ 策略</span>
+          <span class="mx-6 text-red-300">Past Paper 操練</span>
+          <span class="mx-6">Concept 系統化</span>
+          <span class="mx-6 text-red-300">Graph 拆解</span>
+          <span class="mx-6">MC 伏位</span>
+          <span class="mx-6 text-red-300">LQ 框架</span>
+          <span class="mx-6">DRQ 策略</span>
+          <span class="mx-6 text-red-300">Past Paper 操練</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pain -->
+    <section id="pain" class="py-12 sm:py-18 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 text-center max-w-4xl mx-auto">
+          <p class="text-red-300 font-black mb-3">你是否成日都咁樣諗？</p>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight">
+            唔係你唔努力，<br>
+            係你缺乏一套答題系統。
+          </h2>
+          <p class="mt-5 text-sm sm:text-lg text-white/68 leading-relaxed">
+            好多同學唔係冇溫書，而係溫完之後，去到題目仍然唔知點入手。
+          </p>
+        </div>
+
+        <div class="mt-9 sm:mt-12 grid md:grid-cols-3 gap-4 sm:gap-5">
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-5 sm:p-7 hover:-translate-y-2 hover:bg-white/[0.09] transition">
+            <p class="text-red-300 text-sm font-black">01</p>
+            <h3 class="mt-3 text-xl sm:text-2xl font-black">Concept 背咗但唔識用</h3>
+            <p class="mt-3 text-sm sm:text-base text-white/62 leading-relaxed">
+              Definition 識背，但題目一轉字眼，就唔知用邊個 concept。
+            </p>
+          </div>
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-100 rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-5 sm:p-7 hover:-translate-y-2 hover:bg-white/[0.09] transition">
+            <p class="text-red-300 text-sm font-black">02</p>
+            <h3 class="mt-3 text-xl sm:text-2xl font-black">Graph 識畫但唔識解</h3>
+            <p class="mt-3 text-sm sm:text-base text-white/62 leading-relaxed">
+              知道 D/S，但唔知 movement、shift、price、quantity、TR 點樣寫到攞分。
+            </p>
+          </div>
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-200 rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-5 sm:p-7 hover:-translate-y-2 hover:bg-white/[0.09] transition">
+            <p class="text-red-300 text-sm font-black">03</p>
+            <h3 class="mt-3 text-xl sm:text-2xl font-black">答案散，冇層次</h3>
+            <p class="mt-3 text-sm sm:text-base text-white/62 leading-relaxed">
+              寫咗好多字，但每一句都唔知係為咗攞邊個分。
+            </p>
+          </div>
+        </div>
+
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 mt-8 sm:mt-12 rounded-[2rem] border border-red-500/30 bg-gradient-to-br from-red-950/60 to-black p-5 sm:p-8 lg:p-10 shadow-redSoft">
+          <div class="grid lg:grid-cols-[.78fr_1.22fr] gap-6 items-center">
+            <div>
+              <p class="text-red-300 font-black mb-2">如果唔處理，代價係咩？</p>
+              <h3 class="text-2xl sm:text-4xl font-black leading-tight">
+                你會繼續重複<br>
+                同一種失分模式。
+              </h3>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-3">
+              <div class="rounded-2xl bg-white text-black p-4">
+                <i class="fa-solid fa-clock text-red-600 text-2xl mb-3"></i>
+                <p class="font-black">溫書時間浪費</p>
+                <p class="text-sm text-zinc-600 mt-1">背咗好多，但唔知點轉做答案。</p>
+              </div>
+              <div class="rounded-2xl bg-white text-black p-4">
+                <i class="fa-solid fa-chart-simple text-red-600 text-2xl mb-3"></i>
+                <p class="font-black">分數停滯</p>
+                <p class="text-sm text-zinc-600 mt-1">唔係唔識，而係唔識攞分。</p>
+              </div>
+              <div class="rounded-2xl bg-white text-black p-4">
+                <i class="fa-solid fa-triangle-exclamation text-red-600 text-2xl mb-3"></i>
+                <p class="font-black">考試現場亂</p>
+                <p class="text-sm text-zinc-600 mt-1">見到長題目就驚，唔知第一步。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- System -->
+    <section id="system" class="py-12 sm:py-18 lg:py-24 bg-white text-black">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 max-w-4xl">
+          <p class="text-red-600 font-black mb-3">課程系統</p>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight">
+            一套完整、系統化嘅<br>
+            DSE Econ 攞分方法。
+          </h2>
+          <p class="mt-5 text-sm sm:text-lg text-zinc-600 leading-relaxed">
+            呢個唔係「聽完好似識，但第二日就忘記」嘅課程，而係由淺入深，將 Econ 最重要嘅思維方法拆成可以跟住做嘅步驟。
+          </p>
+        </div>
+
+        <div class="mt-9 sm:mt-12 grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 rounded-[1.5rem] bg-zinc-100 border border-zinc-200 p-5 hover:-translate-y-2 hover:shadow-card transition">
+            <i class="fa-solid fa-book-open text-red-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">Concept</h3>
+            <p class="mt-2 text-sm text-zinc-600">先整理 definition、formula、concept link。</p>
+          </div>
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-75 rounded-[1.5rem] bg-zinc-100 border border-zinc-200 p-5 hover:-translate-y-2 hover:shadow-card transition">
+            <i class="fa-solid fa-magnifying-glass-chart text-red-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">Question</h3>
+            <p class="mt-2 text-sm text-zinc-600">拆題目字眼，判斷考緊邊個 topic。</p>
+          </div>
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-100 rounded-[1.5rem] bg-zinc-100 border border-zinc-200 p-5 hover:-translate-y-2 hover:shadow-card transition">
+            <i class="fa-solid fa-chart-line text-red-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">Graph</h3>
+            <p class="mt-2 text-sm text-zinc-600">曲線點郁、結果點分析、點樣寫。</p>
+          </div>
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-150 rounded-[1.5rem] bg-zinc-100 border border-zinc-200 p-5 hover:-translate-y-2 hover:shadow-card transition">
+            <i class="fa-solid fa-bullseye text-red-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">Past Paper</h3>
+            <p class="mt-2 text-sm text-zinc-600">用歷屆題目睇 DSE 真正點考。</p>
+          </div>
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-200 rounded-[1.5rem] bg-zinc-100 border border-zinc-200 p-5 hover:-translate-y-2 hover:shadow-card transition">
+            <i class="fa-solid fa-pen-nib text-red-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">Answer</h3>
+            <p class="mt-2 text-sm text-zinc-600">將 concept 寫成考試攞分答案。</p>
+          </div>
+        </div>
+
+        <div class="mt-9 sm:mt-12 rounded-[2rem] bg-black text-white p-5 sm:p-8 lg:p-10 overflow-hidden relative">
+          <div class="absolute -right-16 -top-16 h-52 w-52 rounded-full border border-red-500/30 animate-spinSlow"></div>
+          <div class="relative grid lg:grid-cols-3 gap-5">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+              <p class="text-red-300 font-black">課堂前段</p>
+              <h4 class="mt-2 text-2xl font-black">先講 Concept</h4>
+              <p class="mt-3 text-sm text-white/65">用最直接例子處理學生最易混亂嘅核心概念。</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+              <p class="text-red-300 font-black">課堂中段</p>
+              <h4 class="mt-2 text-2xl font-black">再拆題型</h4>
+              <p class="mt-3 text-sm text-white/65">用 DSE 常見考法，教你見到題目要點樣反應。</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+              <p class="text-red-300 font-black">課堂後段</p>
+              <h4 class="mt-2 text-2xl font-black">最後操答案</h4>
+              <p class="mt-3 text-sm text-white/65">將 concept、graph、point 變成一段完整考試答案。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forms -->
+    <section id="forms" class="py-12 sm:py-18 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 text-center max-w-4xl mx-auto">
+          <p class="text-red-300 font-black mb-3">課程介紹</p>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight">
+            中四、中五、中六，<br>
+            每個階段都有唔同打法。
+          </h2>
+          <p class="mt-5 text-sm sm:text-lg text-white/68">
+            唔同年級最大問題唔同，所以課程唔係一式一樣塞 notes，而係按階段處理。
+          </p>
+        </div>
+
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 mt-8 sm:mt-10 flex justify-center">
+          <div class="inline-grid grid-cols-3 rounded-2xl border border-white/10 bg-white/[0.06] p-1 w-full max-w-xl">
+            <button class="form-tab active rounded-xl px-3 py-3 text-sm sm:text-base font-black bg-red-600" data-target="f4">中四 F4</button>
+            <button class="form-tab rounded-xl px-3 py-3 text-sm sm:text-base font-black text-white/65" data-target="f5">中五 F5</button>
+            <button class="form-tab rounded-xl px-3 py-3 text-sm sm:text-base font-black text-white/65" data-target="f6">中六 F6</button>
+          </div>
+        </div>
+
+        <div class="mt-7">
+          <div id="f4" class="form-panel grid lg:grid-cols-[.9fr_1.1fr] gap-5 items-stretch">
+            <div class="rounded-[2rem] border border-red-500/30 bg-gradient-to-br from-red-950/80 to-black p-5 sm:p-8 shadow-redSoft">
+              <div class="h-14 w-14 rounded-2xl bg-red-600 flex items-center justify-center shadow-glow mb-5">
+                <i class="fa-solid fa-seedling text-2xl"></i>
+              </div>
+              <p class="text-red-300 font-black">F4｜打底期</p>
+              <h3 class="mt-2 text-3xl sm:text-5xl font-black leading-tight">先建立 Econ 腦</h3>
+              <p class="mt-5 text-sm sm:text-lg text-white/68 leading-relaxed">
+                中四最重要唔係狂操難題，而係由一開始建立正確概念，知道 economics 係點樣諗問題。
+              </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-white text-black p-5">
+                <h4 class="font-black text-xl text-red-700">重點處理</h4>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-700">
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>Basic Economic Concepts</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>Opportunity Cost / Scarcity</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>Demand & Supply 入門</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>基本 graph language</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-white text-black p-5">
+                <h4 class="font-black text-xl text-red-700">完成後會識</h4>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-700">
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>知道 Econ 題目點諗</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>唔再一開波就背錯方向</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>期考題目有基本答題框架</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>為 F5/F6 打好底</li>
+                </ul>
+              </div>
+              <div class="sm:col-span-2 rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+                <p class="font-black text-red-300">最適合：</p>
+                <p class="mt-2 text-white/70 text-sm sm:text-base">剛開始讀 Econ、覺得 concept 散、唔想之後越讀越亂嘅學生。</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="f5" class="form-panel hidden grid lg:grid-cols-[.9fr_1.1fr] gap-5 items-stretch">
+            <div class="rounded-[2rem] border border-red-500/30 bg-gradient-to-br from-red-950/80 to-black p-5 sm:p-8 shadow-redSoft">
+              <div class="h-14 w-14 rounded-2xl bg-red-600 flex items-center justify-center shadow-glow mb-5">
+                <i class="fa-solid fa-layer-group text-2xl"></i>
+              </div>
+              <p class="text-red-300 font-black">F5｜整合期</p>
+              <h3 class="mt-2 text-3xl sm:text-5xl font-black leading-tight">將零散 topic 串埋</h3>
+              <p class="mt-5 text-sm sm:text-lg text-white/68 leading-relaxed">
+                中五最大問題通常係 topic 開始多，micro、macro、market intervention、market structure 混埋一齊，所以要開始用系統整合。
+              </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-white text-black p-5">
+                <h4 class="font-black text-xl text-red-700">重點處理</h4>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-700">
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>Market Intervention</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>Market Structure</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>Profit Maximization</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>GDP / AD-AS 基礎</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-white text-black p-5">
+                <h4 class="font-black text-xl text-red-700">完成後會識</h4>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-700">
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>分辨題目屬於邊個 topic</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>graph 分析唔再亂</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>開始建立 LQ 答題框架</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>Past Paper 有方向咁操</li>
+                </ul>
+              </div>
+              <div class="sm:col-span-2 rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+                <p class="font-black text-red-300">最適合：</p>
+                <p class="mt-2 text-white/70 text-sm sm:text-base">成日覺得自己「好似識，但做題又錯」嘅學生。</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="f6" class="form-panel hidden grid lg:grid-cols-[.9fr_1.1fr] gap-5 items-stretch">
+            <div class="rounded-[2rem] border border-red-500/30 bg-gradient-to-br from-red-950/80 to-black p-5 sm:p-8 shadow-redSoft">
+              <div class="h-14 w-14 rounded-2xl bg-red-600 flex items-center justify-center shadow-glow mb-5">
+                <i class="fa-solid fa-rocket text-2xl"></i>
+              </div>
+              <p class="text-red-300 font-black">F6｜衝刺期</p>
+              <h3 class="mt-2 text-3xl sm:text-5xl font-black leading-tight">由識 concept 去到識攞分</h3>
+              <p class="mt-5 text-sm sm:text-lg text-white/68 leading-relaxed">
+                中六唔可以再只係溫 concept，要直接處理 Past Paper、時間分配、DRQ、LQ 框架同 MC 高危伏位。
+              </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-white text-black p-5">
+                <h4 class="font-black text-xl text-red-700">重點處理</h4>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-700">
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>Past Paper 高頻題型</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>DRQ 資料回應題策略</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>MC 伏位與刪選項</li>
+                  <li><i class="fa-solid fa-check text-green-600 mr-2"></i>LQ 滿分框架</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-white text-black p-5">
+                <h4 class="font-black text-xl text-red-700">完成後會識</h4>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-700">
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>答題快而準</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>知道每段答案攞咩分</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>見 DRQ 唔再亂</li>
+                  <li><i class="fa-solid fa-arrow-right text-red-600 mr-2"></i>最後階段集中修正錯誤</li>
+                </ul>
+              </div>
+              <div class="sm:col-span-2 rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+                <p class="font-black text-red-300">最適合：</p>
+                <p class="mt-2 text-white/70 text-sm sm:text-base">想保 4、穩 5、衝星，但唔想最後幾個月亂操卷嘅學生。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Outcome -->
+    <section id="outcome" class="py-12 sm:py-18 lg:py-24 bg-white text-black">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 grid lg:grid-cols-[.95fr_1.05fr] gap-8 items-center">
+          <div>
+            <p class="text-red-600 font-black mb-3">完成課程後</p>
+            <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight">
+              你帶走嘅唔只係 notes，<br>
+              而係一套可以用到考試嘅方法。
+            </h2>
+          </div>
+
+          <div class="rounded-[2rem] bg-black text-white p-5 sm:p-8 shadow-card">
+            <i class="fa-solid fa-quote-left text-red-500 text-4xl mb-4"></i>
+            <p class="text-xl sm:text-3xl font-black leading-relaxed">
+              「經濟科唔係背得多就高分，而係你有冇一套方法，將 concept 變成答案。」
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-9 sm:mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 rounded-[1.6rem] bg-zinc-100 p-5 border border-zinc-200">
+            <i class="fa-solid fa-check-circle text-green-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">思維框架完整</h3>
+            <p class="mt-2 text-sm text-zinc-600">知道每個 topic 點連住考試題型。</p>
+          </div>
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-75 rounded-[1.6rem] bg-zinc-100 p-5 border border-zinc-200">
+            <i class="fa-solid fa-check-circle text-green-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">做題唔再靠估</h3>
+            <p class="mt-2 text-sm text-zinc-600">見題先拆字眼，再決定用 concept / graph / formula。</p>
+          </div>
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-100 rounded-[1.6rem] bg-zinc-100 p-5 border border-zinc-200">
+            <i class="fa-solid fa-check-circle text-green-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">答案更有層次</h3>
+            <p class="mt-2 text-sm text-zinc-600">每段答案都有清楚目的，唔再寫散文。</p>
+          </div>
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-150 rounded-[1.6rem] bg-zinc-100 p-5 border border-zinc-200">
+            <i class="fa-solid fa-check-circle text-green-600 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">考試冇咁亂</h3>
+            <p class="mt-2 text-sm text-zinc-600">由「見題驚」變成「知道第一步做咩」。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Teacher -->
+    <section class="py-12 sm:py-18 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 text-center max-w-4xl mx-auto">
+          <p class="text-red-300 font-black mb-3">你可能會問</p>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight">
+            點解由我教你 DSE 經濟科？
+          </h2>
+        </div>
+
+        <div class="mt-9 sm:mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-5 sm:p-6">
+            <i class="fa-solid fa-graduation-cap text-red-300 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">學術根底</h3>
+            <p class="mt-3 text-sm text-white/62 leading-relaxed">大學主修經濟，熟悉 DSE Econ concept 同考評邏輯。</p>
+          </div>
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-75 rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-5 sm:p-6">
+            <i class="fa-solid fa-brain text-red-300 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">系統派教學</h3>
+            <p class="mt-3 text-sm text-white/62 leading-relaxed">唔係叫你硬背，而係將複雜 concept 翻譯成學生聽得明嘅步驟。</p>
+          </div>
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-100 rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-5 sm:p-6">
+            <i class="fa-solid fa-pen-ruler text-red-300 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">實戰考試框架</h3>
+            <p class="mt-3 text-sm text-white/62 leading-relaxed">每個 concept 都會連住 MC、LQ、DRQ，學完即刻知點用。</p>
+          </div>
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-150 rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-5 sm:p-6">
+            <i class="fa-solid fa-users text-red-300 text-3xl mb-4"></i>
+            <h3 class="font-black text-xl">明白學生卡位</h3>
+            <p class="mt-3 text-sm text-white/62 leading-relaxed">知道學生通常錯喺邊：字眼、graph、答題層次、concept 展開。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suitable -->
+    <section class="py-12 sm:py-18 lg:py-24 bg-zinc-950 border-y border-white/10">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="grid lg:grid-cols-2 gap-5">
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 rounded-[2rem] border border-green-500/25 bg-gradient-to-br from-green-950/50 to-white/[0.04] p-5 sm:p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="h-11 w-11 rounded-2xl bg-green-500 flex items-center justify-center">
+                <i class="fa-solid fa-check text-xl"></i>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-black">呢個補習適合你，如果你係：</h2>
+            </div>
+            <ul class="space-y-3 text-sm sm:text-base text-white/78">
+              <li><i class="fa-solid fa-check text-green-400 mr-2"></i>F4–F6 修讀 DSE 經濟科學生</li>
+              <li><i class="fa-solid fa-check text-green-400 mr-2"></i>概念成日混亂，尤其 demand/supply、elasticity、market structure</li>
+              <li><i class="fa-solid fa-check text-green-400 mr-2"></i>明明背 notes，但成績停滯不前</li>
+              <li><i class="fa-solid fa-check text-green-400 mr-2"></i>想由補底去到穩分，甚至衝更高 grade</li>
+              <li><i class="fa-solid fa-check text-green-400 mr-2"></i>想有人幫你整理一套真正用到考試嘅方法</li>
+            </ul>
+          </div>
+
+          <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 delay-100 rounded-[2rem] border border-red-500/25 bg-gradient-to-br from-red-950/50 to-white/[0.04] p-5 sm:p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="h-11 w-11 rounded-2xl bg-red-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-xl"></i>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-black">呢個補習不適合你，如果你係：</h2>
+            </div>
+            <ul class="space-y-3 text-sm sm:text-base text-white/78">
+              <li><i class="fa-solid fa-xmark text-red-400 mr-2"></i>只想臨考前拎幾份答案背咗就算</li>
+              <li><i class="fa-solid fa-xmark text-red-400 mr-2"></i>唔願意自己課後做練習、修正錯誤</li>
+              <li><i class="fa-solid fa-xmark text-red-400 mr-2"></i>覺得 Econ 只靠死記硬背就可以高分</li>
+              <li><i class="fa-solid fa-xmark text-red-400 mr-2"></i>想一步登天，但唔願意打好基礎</li>
+              <li><i class="fa-solid fa-xmark text-red-400 mr-2"></i>只想聽故事娛樂，唔想認真提升答題能力</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student Voice / Highlight -->
+    <section class="py-12 sm:py-18 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <p class="text-red-300 font-black mb-3">Student Voice</p>
+            <h2 class="text-3xl sm:text-5xl font-black">學生最常見嘅改變</h2>
+          </div>
+          <p class="text-white/55 text-sm sm:text-base">左右滑動查看更多</p>
+        </div>
+
+        <div class="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
+          <div class="snap-start min-w-[78%] sm:min-w-[360px] rounded-[1.7rem] bg-white text-black p-5">
+            <i class="fa-solid fa-star text-yellow-500"></i>
+            <p class="mt-4 font-black text-xl">「終於知 graph 要點寫。」</p>
+            <p class="mt-2 text-sm text-zinc-600">以前只係識畫，依家知道每一步點解同點樣解釋。</p>
+          </div>
+          <div class="snap-start min-w-[78%] sm:min-w-[360px] rounded-[1.7rem] bg-white text-black p-5">
+            <i class="fa-solid fa-star text-yellow-500"></i>
+            <p class="mt-4 font-black text-xl">「LQ 冇以前咁驚。」</p>
+            <p class="mt-2 text-sm text-zinc-600">有框架之後，見到題目知道先寫咩、再寫咩。</p>
+          </div>
+          <div class="snap-start min-w-[78%] sm:min-w-[360px] rounded-[1.7rem] bg-white text-black p-5">
+            <i class="fa-solid fa-star text-yellow-500"></i>
+            <p class="mt-4 font-black text-xl">「MC 唔再亂估。」</p>
+            <p class="mt-2 text-sm text-zinc-600">學識睇字眼同刪選項，錯嘅原因清楚咗好多。</p>
+          </div>
+          <div class="snap-start min-w-[78%] sm:min-w-[360px] rounded-[1.7rem] bg-white text-black p-5">
+            <i class="fa-solid fa-star text-yellow-500"></i>
+            <p class="mt-4 font-black text-xl">「讀 Econ 有方向。」</p>
+            <p class="mt-2 text-sm text-zinc-600">唔再每課散咁溫，開始知每個 topic 點連埋一齊。</p>
+          </div>
+        </div>
+
+        <div class="mt-8 grid lg:grid-cols-[1.15fr_.85fr] gap-5">
+          <div class="rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 sm:p-8">
+            <p class="text-red-300 font-black mb-2">Highlight Reel</p>
+            <h3 class="text-2xl sm:text-4xl font-black">課堂唔係齋聽，而係即場拆題。</h3>
+            <p class="mt-4 text-sm sm:text-base text-white/65 leading-relaxed">
+              每堂會用 Past Paper 題型示範，將題目字眼、concept、graph 同答案連起來，令學生知道自己錯喺邊、點樣改。
+            </p>
+          </div>
+          <div class="rounded-[2rem] border border-red-500/30 bg-red-950/35 p-5 sm:p-8 flex items-center gap-4">
+            <div class="h-16 w-16 rounded-full bg-red-600 flex items-center justify-center shadow-glow">
+              <i class="fa-solid fa-play text-2xl"></i>
+            </div>
+            <div>
+              <p class="font-black text-xl">課堂花絮 / 學生成果</p>
+              <p class="text-sm text-white/60 mt-1">可之後放 IG 影片、學生 story 或課堂相。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-12 sm:py-18 lg:py-24 bg-white text-black">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6">
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 text-center">
+          <p class="text-red-600 font-black mb-3">FAQ</p>
+          <h2 class="text-3xl sm:text-5xl font-black">常見問題</h2>
+        </div>
+
+        <div class="mt-8 sm:mt-10 space-y-3">
+          <div class="faq-item rounded-2xl border border-zinc-200 bg-zinc-50 overflow-hidden">
+            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 text-left font-black text-base sm:text-lg">
+              <span>我 Econ 好弱，跟唔跟得上？</span>
+              <i class="fa-solid fa-plus text-red-600"></i>
+            </button>
+            <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-zinc-600 leading-relaxed">
+              跟得上。課程會由底層 concept 開始整理，再慢慢去到 graph、題型同答題框架。重點係你願唔願意跟住做練習同改錯。
+            </div>
+          </div>
+
+          <div class="faq-item rounded-2xl border border-zinc-200 bg-zinc-50 overflow-hidden">
+            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 text-left font-black text-base sm:text-lg">
+              <span>同自己睇 notes 有咩分別？</span>
+              <i class="fa-solid fa-plus text-red-600"></i>
+            </button>
+            <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-zinc-600 leading-relaxed">
+              Notes 只係資料，課程俾你嘅係系統。你會知道邊啲 concept 常考、題目字眼點拆、graph 點寫、答案點樣鋪排。
+            </div>
+          </div>
+
+          <div class="faq-item rounded-2xl border border-zinc-200 bg-zinc-50 overflow-hidden">
+            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 text-left font-black text-base sm:text-lg">
+              <span>會唔會淨係教 MC？</span>
+              <i class="fa-solid fa-plus text-red-600"></i>
+            </button>
+            <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-zinc-600 leading-relaxed">
+              唔會。課程會處理 MC 常考位，同時亦會教 LQ / DRQ 點樣拆題、用 graph、寫 concept explanation，同埋點樣用框架攞分。
+            </div>
+          </div>
+
+          <div class="faq-item rounded-2xl border border-zinc-200 bg-zinc-50 overflow-hidden">
+            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 text-left font-black text-base sm:text-lg">
+              <span>F4 / F5 / F6 都適合？</span>
+              <i class="fa-solid fa-plus text-red-600"></i>
+            </button>
+            <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-zinc-600 leading-relaxed">
+              適合，但方向不同。F4 重點打底，F5 重點整合 topic，F6 重點 Past Paper、DRQ、LQ 框架同考試策略。
+            </div>
+          </div>
+
+          <div class="faq-item rounded-2xl border border-zinc-200 bg-zinc-50 overflow-hidden">
+            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 text-left font-black text-base sm:text-lg">
+              <span>上完會唔會即刻高分？</span>
+              <i class="fa-solid fa-plus text-red-600"></i>
+            </button>
+            <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-zinc-600 leading-relaxed">
+              課程會俾你一套攞分方法，但分數提升仍然需要你跟住做練習、改錯、熟習框架。呢個係工具，唔係魔法。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="apply" class="py-12 sm:py-18 lg:py-24">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6">
+        <div data-animate class="opacity-0 translate-y-8 transition-all duration-700 relative overflow-hidden rounded-[2.2rem] border border-red-400/35 bg-gradient-to-br from-red-700 via-red-950 to-black p-6 sm:p-10 lg:p-14 text-center shadow-glow">
+          <div class="absolute -right-14 -top-14 text-white/10 text-[12rem] animate-float">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+
+          <div class="relative">
+            <p class="inline-flex items-center gap-2 rounded-full bg-white/12 border border-white/12 px-4 py-2 text-xs sm:text-sm font-black mb-5">
+              <i class="fa-solid fa-fire text-red-300"></i>
+              Next Batch｜名額有限
+            </p>
+
+            <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight">
+              撞期或者錯過？<br>
+              私訊留底，下期開班即通知。
+            </h2>
+
+            <p class="mt-5 text-sm sm:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+              如果你唔想 Econ 繼續靠估、靠背、靠彩數，就由而家開始建立一套真正用到考試嘅答題系統。
+            </p>
+
+            <div class="mt-8 grid sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
+              <div class="rounded-2xl bg-white/12 border border-white/10 p-4">
+                <p class="text-2xl font-black">Concept</p>
+                <p class="text-xs text-white/55 mt-1">概念整理</p>
+              </div>
+              <div class="rounded-2xl bg-white/12 border border-white/10 p-4">
+                <p class="text-2xl font-black">Graph</p>
+                <p class="text-xs text-white/55 mt-1">圖像分析</p>
+              </div>
+              <div class="rounded-2xl bg-white/12 border border-white/10 p-4">
+                <p class="text-2xl font-black">Answer</p>
+                <p class="text-xs text-white/55 mt-1">答題框架</p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="https://wa.me/85264097197" target="_blank" class="magnetic inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-7 py-4 text-black font-black hover:bg-zinc-100 transition">
+                WhatsApp 查詢
+                <i class="fa-brands fa-whatsapp text-green-600 text-xl"></i>
+              </a>
+              <a href="https://www.instagram.com/heroeconomics" target="_blank" class="inline-flex items-center justify-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-7 py-4 font-black hover:bg-white/15 transition">
+                Instagram DM
+                <i class="fa-brands fa-instagram text-xl"></i>
+              </a>
+            </div>
+
+            <p class="mt-5 text-xs text-white/45">@heroeconomics・課程通知・早鳥優惠先發</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mobile Floating CTA -->
+  <div class="fixed bottom-3 left-3 right-3 z-40 md:hidden">
+    <a href="#apply" class="flex items-center justify-center gap-3 rounded-2xl bg-red-600 px-5 py-3.5 font-black shadow-glow">
+      立即查詢報名
+      <i class="fa-solid fa-arrow-right"></i>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 bg-black py-8 sm:py-10 pb-24 md:pb-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col md:flex-row gap-5 md:items-center md:justify-between">
+      <div>
+        <p class="font-black text-xl">HeroEconomics</p>
+        <p class="text-sm text-white/50 mt-1">DSE Econ System Course｜Concept → Graph → Answer</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/85264097197" target="_blank" class="h-11 w-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/10 transition">
+          <i class="fa-brands fa-whatsapp text-xl"></i>
+        </a>
+        <a href="https://www.instagram.com/heroeconomics" target="_blank" class="h-11 w-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/10 transition">
+          <i class="fa-brands fa-instagram text-xl"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const progress = document.getElementById('scrollProgress');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const width = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progress.style.width = width + '%';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const el = entry.target;
+        const target = Number(el.getAttribute('data-count'));
+        const duration = 1100;
+        const start = performance.now();
+
+        function update(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const value = Math.floor(eased * target);
+          el.textContent = target >= 1000 ? value.toLocaleString() + '+' : value + (target === 90 ? '%' : '');
+          if (progress < 1) requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const content = item.querySelector('.faq-content');
+        const icon = btn.querySelector('i');
+
+        document.querySelectorAll('.faq-content').forEach(other => {
+          if (other !== content) other.classList.add('hidden');
+        });
+
+        document.querySelectorAll('.faq-btn i').forEach(otherIcon => {
+          if (otherIcon !== icon) {
+            otherIcon.classList.add('fa-plus');
+            otherIcon.classList.remove('fa-minus');
+          }
+        });
+
+        content.classList.toggle('hidden');
+        icon.classList.toggle('fa-plus');
+        icon.classList.toggle('fa-minus');
+      });
+    });
+
+    const tabs = document.querySelectorAll('.form-tab');
+    const panels = document.querySelectorAll('.form-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-target');
+
+        tabs.forEach(t => {
+          t.classList.remove('active', 'bg-red-600', 'text-white');
+          t.classList.add('text-white/65');
+        });
+
+        tab.classList.add('active', 'bg-red-600', 'text-white');
+        tab.classList.remove('text-white/65');
+
+        panels.forEach(panel => {
+          panel.classList.add('hidden');
+          if (panel.id === target) {
+            panel.classList.remove('hidden');
+            panel.classList.add('animate-fadeUp');
+            setTimeout(() => panel.classList.remove('animate-fadeUp'), 750);
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll('.magnetic').forEach(button => {
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        button.style.transform = `translate(${x * 0.08}px, ${y * 0.12}px)`;
+      });
+
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translate(0, 0)';
+      });
+    });
+  </script>
+</body>
+</html>
